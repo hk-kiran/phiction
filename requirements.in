@@ -1,0 +1,21 @@
+# pip-compile --output-file=requirements.txt requirements.in
+
+opencv-python
+matplotlib
+pillow
+pymongo
+sentence-transformers
+tqdm 
+python-dotenv 
+llama-index 
+llama-index-vector-stores-mongodb 
+llama-index-embeddings-openai 
+pymongo 
+openai 
+langchain_openai 
+langchain 
+langgraph 
+python-dotenv 
+pyyaml 
+elevenlabs
+ipywidgets
