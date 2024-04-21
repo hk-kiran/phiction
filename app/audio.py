@@ -9,34 +9,38 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import settings
 
-def get_client():
+class GenerateAudio:
 
-    api_key = settings.ELEVEN_LABS_API_KEY
-    client = ElevenLabs(
-        api_key=api_key # Defaults to ELEVEN_API_KEY
-    )
+    def get_client(self):
 
-    return client
+        api_key = settings.ELEVEN_LABS_API_KEY
+        client = ElevenLabs(
+            api_key=api_key # Defaults to ELEVEN_API_KEY
+        )
 
-def generate(client, voice, model, text):
-    print(text)
-    audio = client.generate(
-            text=text,
-            voice=voice,
-            model=model
-    )
-    
-    return audio
+        return client
+
+    def generate(self, client, voice, model, text):
+        print(text)
+        audio = client.generate(
+                text=text,
+                voice=voice,
+                model=model
+        )
+        
+        return audio
 
 if __name__ == '__main__':
 
-    client = get_client()
+    aud = GenerateAudio()
+
+    client = aud.get_client()
     
     text =  "Descubre el poder de la realeza con nuestra tiara. Elegancia y lujo en cada detalle."
     voice = 'Nicole'
     model = "eleven_multilingual_v2"
 
-    audio = generate(client, voice, model, text)
+    audio = aud.generate(client, voice, model, text)
 
     print(audio)
     language = 'es'
