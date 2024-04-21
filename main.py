@@ -5,6 +5,7 @@ from os.path import join, dirname
 from dotenv import load_dotenv
 from src.video_gen import AnimateLCM
 import uuid
+import random 
 
 app = Flask(__name__)
 
@@ -51,8 +52,8 @@ def get_video():
     # }), 200
     client_id = str(uuid.uuid4())
     vigen = AnimateLCM(server="213.173.110.106:15222", client_id=client_id, verbose=True)
-    vigen.img2vid('helloyoung25d_V15j.safetensors',stable_diffusion_prompt, f"outputs/{client_id}_char.mp4")
-    vigen.img2vid('helloobjects_V15evae.safetensors',stable_diffusion_object_prompt, f"outputs/{client_id}_obj.mp4")
+    vigen.img2vid('helloyoung25d_V15j.safetensors',stable_diffusion_prompt, f"outputs/{client_id}_1.mp4")
+    vigen.img2vid('helloyoung25d_V15j.safetensors',stable_diffusion_prompt, f"outputs/{client_id}_2.mp4", seed=random.randint(0,100000000))
     return jsonify({'message': 'video generated successfully'}), 200
 
 

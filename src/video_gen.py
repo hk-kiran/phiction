@@ -37,7 +37,7 @@ class AnimateLCM:
             return json.loads(response.read())
 
     def get_images(self, ws, prompt):
-        prompt_id = self.queue_prompt(prompt, self.client_id, self.server)["prompt_id"]
+        prompt_id = self.queue_prompt(prompt)["prompt_id"]
         output_images = {}
         current_node = ""
         while True:
@@ -85,7 +85,7 @@ class AnimateLCM:
             workflow["58"]["inputs"]["noise_seed"] = seed
         ws = websocket.WebSocket()
         ws.connect("ws://{}/ws?clientId={}".format(self.server, self.client_id))
-        images = self.get_images(ws, workflow, self.client_id, self.server)
+        images = self.get_images(ws, workflow)
 
         writer = imageio.get_writer(vid_path, fps=12, codec="libx264", quality=8)
 
