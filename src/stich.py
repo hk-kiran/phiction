@@ -15,7 +15,7 @@ import os
 import sys
 
 class stich():
-    def video():
+    def video(self):
         clip_list = [
             "./videos/AnimateDiff_00012.mp4",
             "./videos/AnimateDiff_00015.mp4",
@@ -54,15 +54,15 @@ class stich():
                 final_clips.append(clip)
 
         # Concatenate all clips in the final_clips list
-        final_clip = concatenate_videoclips(final_clips)
-        final_clip_duration = final_clip.duration
+        self.final_clip = concatenate_videoclips(final_clips)
+        final_clip_duration = self.final_clip.duration
 
         # Write the final video to a file
-        final_clip.write_videofile("res8.mp4", codec="libx264")
+        self.final_clip.write_videofile("res8.mp4", codec="libx264")
         return final_clip
 
 
-    def audio():
+    def audio(self):
         naration = "./naration/English_tiaras.mp3"
         music = "./music/audio_0.wav"
 
@@ -89,12 +89,13 @@ class stich():
         return superimposed_audio
 
 
-    def merge(final_clip):
+    def merge(self, self.final_clip):
         superimposed_audio = AudioFileClip("audio_si_res1.mp3")
-        final_ad = final_clip.set_audio(superimposed_audio)
+        final_ad = self.final_clip.set_audio(superimposed_audio)
         final_ad.write_videofile("final_ad.mp4", codec="libx264", audio_codec="aac")
 
 
+    #in this order
     # final_clip = video()
     # superimposed_audio = audio()
     # merge(final_clip)
