@@ -1,5 +1,5 @@
-from generate import *
-from audio import *
+from app.generate import *
+from app.audio import *
 
 #Image description generation
 
@@ -23,11 +23,11 @@ class RunGenerate:
         self.description = self.gen.generate_description(image)
     
     def get_sd_human_prompt(self, gender):
-        sd_prompt = gen.generate_sd_prompt_human(description, gender) # Used for API call
+        sd_prompt = self.gen.generate_sd_prompt_human(self.description, gender) # Used for API call
         return sd_prompt
     
     def get_sd_object_prompt(self):
-        object_prompt = gen.generate_sd_prompt_object(description)
+        object_prompt = self.gen.generate_sd_prompt_object(self.description)
         return object_prompt
 
 

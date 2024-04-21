@@ -22,7 +22,7 @@ narration_generation:
 
   user:
   - type: text
-    text: 'Objective: Develop a succinct, engaging narration for a 10-second video advertisement.
+    text: 'Objective: Develop a succinct, engaging, and creative narration for a 20-second video advertisement.
 
           Product Description: Describe the object, including its primary function, key features, and any unique selling points. For instance, if the product is a smartwatch, mention its health tracking capabilities, customizable faces, and water-resistant design.
 
@@ -30,7 +30,7 @@ narration_generation:
 
           Tone and Style: Indicate the desired tone of the narration, whether it should be inspirational, humorous, or straightforward.
 
-          Word Limit: The narration must be between 14 to 18 words to fit within a 10-second timeframe.
+          Word Limit: The narration must be between 20 to 26 words to fit within a 20-second timeframe.
           Return a JSON object with the following key:
           narration:
 
@@ -105,7 +105,64 @@ sd_ad_prompt:
         
         --------------------------------
 
-        Object Description - The object is a Coca-Cola can featuring a special edition design with Marvel's character Deadpool. The can is predominantly red with white and black text. It prominently displays the Coca-Cola logo in its classic white script against a red background near the top. Below this logo, the word 'ORIGINAL' is written in bold black letters. A dynamic image of Deadpool in his signature red and black superhero suit covers a substantial part of the can, depicting him in a playful and action-ready pose. The material of the can appears to be aluminum, typical for soda cans, with a glossy finish that enhances the vividness of its colors and design. This special edition can is likely used as a collectible or promotional item in addition to its primary use as a beverage container.
-        Gender - Male
+        "
+
+sd_object_prompt:
+  system:
+  - type: text
+    text: "You are an assistant that will create prompts for a Stable Diffusion model based on the in-context exampels provided"
+
+  user:
+  - type: >
+    text: "Create a positive prompt and negative prompt for a Stable Diffusion model based on the in-context examples provided. The prompts should be designed to guide the model in generating high-quality images that align with the given descriptions.
+            A description of an object will be added as Object Description - [Description] . 
+            The prompt should be designed to guide the model in generating high-quality images that align with the given descriptions for an advertisement of an object.
+
+            Use both the context and see the in-context examples to create the prompts.
+    
+        Return a single JSON object with keys:
+
+        positive_prompt
+        negative_prompt
+
+        ----------------------------------------
+        In-context examples
+        ----------------------------------------
+
+        Example 1
+
+        ----------------------------------------
+
+        Positive prompt - 
+        <lyco:GoodHands-beta2:0.5>,high quality, masterpiece, (realistic, photo-realistic:1.2) ,high definition, ultra detailed, raw photo,fcPortrait, Petite woman, her every feature bathed in the playful glow of a pink color scheme, captivating and mesmerizing, ((bodycon dress adorned with iridescent hues, reflecting light in a dazzling display, Holographic gems delicately reflecting a rainbow of colors, slender choker adding a touch of elegance)), shimmering with lustrous hues matching the holo scheme, holographic makeup adorning her eyes and lips, shimmering body glitter on her chest and cleavage, Sleek waves of red hair, shimmering with lustrous hues, raver-infused ambiance, magnetic presence exuding grace, confidence, and a unique allure that captures all attention, ((rave background, laser lights, indoors)), ((dancing, smiling)), dynamic pose, dynamic angle,glossy eyes,cinematic shot,vibrant colors,gorgeous colors,dynamic action pose,
+        Negative prompt - 
+        FastNegativeV2,(bad-artist:1.0), (loli:1.2), (worst quality, low quality:1.4), (bad_prompt_version2:0.8), bad-hands-5,lowres, bad anatomy, bad hands, ((text)), (watermark), error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, ((username)), blurry, (extra limbs), bad-artist-anime, badhandv4, EasyNegative, ng_deepnegative_v1_75t, verybadimagenegative_v1.3, BadDream,(three hands:1.1),(three legs:1.1),(more than two hands:1.4),(more than two legs,:1.2),
+
+        Example 2
+        ----------------------------------------
+        Positive Prompt - 
+        an ice cube with a slice of watermelon in it,lemonade,one ice cube,ice,defence,lemon,cold drinks,whiskey glass with ice cubes,ice cubes,with lemon skin texture,melting 4d cubes,vodka,cherry,cubes of ice around,protection,clean image,ice sculpture,wearing a lemon,molecular gastronomy,
+        
+        Negative Prompt - 
+        (two tails:1.2),FastNegativeV2,(bad-artist:1),(loli:1.2),(worst quality, low quality:1.4),(bad_prompt_version2:0.8),bad-hands-5,lowres,bad anatomy,bad hands,((text)),(watermark),error,missing fingers,extra digit,fewer digits,cropped,worst quality,low quality,normal quality,((username)),blurry,(extra limbs),bad-artist-anime,badhandv4,EasyNegative,ng_deepnegative_v1_75t,verybadimagenegative_v1.3,BadDream,(three hands:1.1),(three legs:1.1),(more than two hands:1.2),(more than two legs:1.2),
+        
+        Example 3
+        ----------------------------------------
+
+        Positive Prompt - 
+        three cherries splashing into a bowl of water, cherry explosion, cherries, cherry, there is one cherry, 4 k hd wallpapear, gems and diamond for fruit, cherry trees, carnal ) wet, cherry blosom trees, water particules, splashes of liquid, red background photorealistic, beautiful art uhd 4 k, realistic water splashes
+        
+        Negative Prompt - 
+        (two tails:1.2),FastNegativeV2,(bad-artist:1),(loli:1.2),(worst quality, low quality:1.4),(bad_prompt_version2:0.8),bad-hands-5,lowres,bad anatomy,bad hands,((text)),(watermark),error,missing fingers,extra digit,fewer digits,cropped,worst quality,low quality,normal quality,((username)),blurry,(extra limbs),bad-artist-anime,badhandv4,EasyNegative,ng_deepnegative_v1_75t,verybadimagenegative_v1.3,BadDream,(three hands:1.1),(three legs:1.1),(more than two hands:1.2),(more than two legs:1.2),
+        Example 4
+        ----------------------------------------
+
+        Positive Prompt - 
+        (8k, RAW photo, best quality, masterpiece:1.2),(realistic, photo-realistic:1.3),perfume,(shiny background:1.2),yellow theme,water surface,<lora:cosmetics_v2:0.5>,solo focus,Product Feature,
+        
+        Negative Prompt - 
+        (two tails:1.2),FastNegativeV2,(bad-artist:1),(loli:1.2),(worst quality, low quality:1.4),(bad_prompt_version2:0.8),bad-hands-5,lowres,bad anatomy,bad hands,((text)),(watermark),error,missing fingers,extra digit,fewer digits,cropped,worst quality,low quality,normal quality,((username)),blurry,(extra limbs),bad-artist-anime,badhandv4,EasyNegative,ng_deepnegative_v1_75t,verybadimagenegative_v1.3,BadDream,(three hands:1.1),(three legs:1.1),(more than two hands:1.2),(more than two legs:1.2),
+        
+        --------------------------------
         
         "

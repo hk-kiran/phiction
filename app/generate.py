@@ -2,16 +2,13 @@
 from openai import OpenAI
 import json
 
-from utils import add_images, encode_image, fetch_and_encode_images, parse_caption_story_json, load_prompts
-from Prompts import Prompt, ImageGenerationPrompt, StoryPrompt
-
+from app.utils import add_images, encode_image, fetch_and_encode_images, parse_caption_story_json, load_prompts
+from os.path import join, dirname
+from dotenv import load_dotenv
 
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-import settings
-
 
 class Generate:
 
@@ -106,13 +103,12 @@ class Generate:
                     {
                         "type": "image_url",
                         "image_url": {
-                            "url": f"data:image/jpeg;base64,{image[0]}"
+                            "url": f"data:image/jpeg;base64,{image}"
                         }
                     }
                 ]
             }
         ]
-        
         response = client.chat.completions.create(
                     model="gpt-4-turbo",
                     messages=messages,
@@ -160,7 +156,7 @@ class Generate:
         client = OpenAI()
 
         message = [{"role": "system", "content": prompt['system'][0]['text']}, 
-                                {"role":"user", "content": prompt['user'][0]['text'] + 'Object description - ' + description + ' Gender - ' + gender }]
+                                {"role":"user", "content": prompt['user'][0]['text'] + 'Object description - ' + description["description"] + ' Gender - ' + gender }]
         
         print('Generating SD prompt')
         response = client.chat.completions.create(
@@ -181,7 +177,7 @@ class Generate:
         client = OpenAI()
 
         message = [{"role": "system", "content": prompt['system'][0]['text']}, 
-                                {"role":"user", "content": prompt['user'][0]['text'] + 'Object description - ' + description }]
+                                {"role":"user", "content": prompt['user'][0]['text'] + 'Object description - ' + description["description"] }]
         
         print('Generating SD prompt')
         response = client.chat.completions.create(
@@ -198,7 +194,6 @@ class Generate:
 
 if __name__ == '__main__':
 
-    os.environ["OPENAI_API_KEY"] = settings.OPENAI_API_KEY
     #generate_humans_description(eye_color='blue', skin_color='brown', hair_color='black', built='medium', age='25')
     #print(pipeline())
     gen = Generate()

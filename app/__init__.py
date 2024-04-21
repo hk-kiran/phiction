@@ -1,8 +1,13 @@
 # app/__init__.py
 import sys
 import os
+from os.path import join, dirname
+from dotenv import load_dotenv
 
-# Ensure the root project directory is in the path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+dotenv_path = join(dirname(__file__), '../.env')
+load_dotenv(dotenv_path)
 
-from settings import OPENAI_API_KEY
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+ELEVEN_LABS_API_KEY = os.environ.get("ELEVEN_LABS_API_KEY")
+
+print("ASDFG", OPENAI_API_KEY, ELEVEN_LABS_API_KEY)

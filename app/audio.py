@@ -7,13 +7,11 @@ import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-import settings
-
 class GenerateAudio:
 
     def get_client(self):
 
-        api_key = settings.ELEVEN_LABS_API_KEY
+        api_key = os.getenv("ELEVEN_LABS_API_KEY")
         client = ElevenLabs(
             api_key=api_key # Defaults to ELEVEN_API_KEY
         )

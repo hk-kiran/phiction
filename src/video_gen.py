@@ -8,12 +8,12 @@ import imageio
 
 
 class AnimateLCM:
-    def __init__(self, server, verbose=False) -> None:
+    def __init__(self, server, client_id, verbose=False) -> None:
         """
         server : Runpod endpoint where ComfyUI is hosted.
         verbose : Enables verbose mode."""
         self.server = server
-        self.client_id = str(uuid.uuid4())
+        self.client_id = client_id
         self.verbose = verbose
 
     def queue_prompt(self, prompt):
@@ -71,10 +71,10 @@ class AnimateLCM:
         """
         if use_upscaler:
             prompt_text = open(
-                "workflows/animatelcm_phiction_ads_with_upscaler_api.json"
+                "src/workflows/animatelcm_phiction_ads_with_upscaler_api.json"
             ).read()
         else:
-            prompt_text = open("workflows/animatelcm_phiction_ads_api.json").read()
+            prompt_text = open("src/workflows/animatelcm_phiction_ads_api.json").read()
 
         workflow = json.loads(prompt_text)
 
