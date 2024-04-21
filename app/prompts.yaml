@@ -1,0 +1,111 @@
+image_description:
+  system:
+  - type: text
+    text: "You are an assistant that will help generate detailed image descriptions based on the given text prompt"
+
+  user:
+  - type: text
+    text: 'Provide a detailed description of the uploaded image. Identify the object. Include key elements such as color, shape, size, and texture. Highlight any distinct features or markings. Mention the apparent material and potential use of the object. Ensure the description captures the essence of the object in a brief but thorough manner.
+
+          Start with "The object is a "
+
+          Return a JSON object with the following key:
+          description:
+
+          '
+
+
+narration_generation:
+  system:
+  - type: text
+    text: "You are an assistant that will help generate advertisement narration based on the given text prompt in "
+
+  user:
+  - type: text
+    text: 'Objective: Develop a succinct, engaging narration for a 10-second video advertisement.
+
+          Product Description: Describe the object, including its primary function, key features, and any unique selling points. For instance, if the product is a smartwatch, mention its health tracking capabilities, customizable faces, and water-resistant design.
+
+          Target Audience: Specify the intended demographic, such as tech-savvy young adults, busy professionals, or health-conscious individuals.
+
+          Tone and Style: Indicate the desired tone of the narration, whether it should be inspirational, humorous, or straightforward.
+
+          Word Limit: The narration must be between 14 to 18 words to fit within a 10-second timeframe.
+          Return a JSON object with the following key:
+          narration:
+
+          Example Product: Smartwatch
+
+          Function: Health and fitness tracking
+          Features: Heart rate monitor, step counter, sleep analysis
+          Unique Selling Point: Customizable interface, water-resistant up to 50 meters
+          Example Narration Prompt:
+          "Transform your fitness with our Smartwatch. Track, analyze, and customize. Dive in, stay healthy!"
+          
+          The description of the object is given below:'
+
+
+sd_ad_prompt:
+  system:
+  - type: text
+    text: "You are an assistant that will create prompts for a Stable Diffusion model based on the in-context exampels provided"
+
+  user:
+  - type: >
+    text: "Create a positive prompt and negative prompt for a Stable Diffusion model based on the in-context examples provided. The prompts should be designed to guide the model in generating high-quality images that align with the given descriptions.
+            A description of an object will be added as Object Description - [Description] . The prompt should be designed to guide the model in generating high-quality images that align with the given descriptions for an advertisement.
+            The gender of a person will be given as Gender - [Gender]:
+
+            Use both the context and see the in-context examples to create the prompts.
+    
+        Return a single JSON object with keys:
+
+        positive_prompt
+        negative_prompt
+
+        ----------------------------------------
+        In-context examples
+        ----------------------------------------
+
+        Example 1
+
+        ----------------------------------------
+
+        Positive prompt - 
+        <lyco:GoodHands-beta2:0.5>,high quality, masterpiece, (realistic, photo-realistic:1.2) ,high definition, ultra detailed, raw photo,fcPortrait, Petite woman, her every feature bathed in the playful glow of a pink color scheme, captivating and mesmerizing, ((bodycon dress adorned with iridescent hues, reflecting light in a dazzling display, Holographic gems delicately reflecting a rainbow of colors, slender choker adding a touch of elegance)), shimmering with lustrous hues matching the holo scheme, holographic makeup adorning her eyes and lips, shimmering body glitter on her chest and cleavage, Sleek waves of red hair, shimmering with lustrous hues, raver-infused ambiance, magnetic presence exuding grace, confidence, and a unique allure that captures all attention, ((rave background, laser lights, indoors)), ((dancing, smiling)), dynamic pose, dynamic angle,glossy eyes,cinematic shot,vibrant colors,gorgeous colors,dynamic action pose,
+        Negative prompt - 
+        FastNegativeV2,(bad-artist:1.0), (loli:1.2), (worst quality, low quality:1.4), (bad_prompt_version2:0.8), bad-hands-5,lowres, bad anatomy, bad hands, ((text)), (watermark), error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, ((username)), blurry, (extra limbs), bad-artist-anime, badhandv4, EasyNegative, ng_deepnegative_v1_75t, verybadimagenegative_v1.3, BadDream,(three hands:1.1),(three legs:1.1),(more than two hands:1.4),(more than two legs,:1.2),
+
+        Example 2
+        ----------------------------------------
+        Positive Prompt - 
+        <lyco:GoodHands-beta2:0.5>, high quality, masterpiece, (realistic, photo-realistic:1.2), high definition, ultra detailed, raw photo, fcPortrait, Elegant woman with a serene and graceful demeanor, captured in a sophisticated studio setting that exudes luxury. She is adorned with exquisite earrings that dangle with every subtle movement, reflecting light with their gem-encrusted surfaces. Her attire is a refined evening gown in deep velvet blue, enhancing the brilliance of the earrings. The background is tastefully blurred, with soft, warm lighting that highlights her sharp features and the delicate structure of the earrings. Her hair is styled in an elegant updo, allowing the earrings to take center stage. Her expression is confident yet inviting, with a slight smile, drawing viewers into the allure of the jewelry. The overall mood is enchanting and classy, perfect for showcasing high-end jewelry.
+
+        Negative Prompt - 
+        FastNegativeV2, (bad-artist:1.0), (loli:1.2), (worst quality, low quality:1.4), (bad_prompt_version2:0.8), bad-hands-5, lowres, bad anatomy, bad hands, ((text)), (watermark), error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, ((username)), blurry, (extra limbs), bad-artist-anime, badhandv4, EasyNegative, ng_deepnegative_v1_75t, verybadimagenegative_v1.3, BadDream, (three hands:1.1), (three legs:1.1), (more than two hands:1.4), (more than two legs:1.2), Clumsily executed setting with poorly lit, drab background. The earrings appear tarnished and cheap, lacking any sparkle or finesse. The model's pose is awkward, her gown ill-fitting and outdated, detracting from the elegance that earrings might otherwise convey. The focus is poorly set, making the earrings barely noticeable, blurred and overshadowed by the glaring imperfections in the scene. Her expression is unengaging, failing to connect with the viewer, which makes the advertisement forgettable and ineffective.
+
+        Example 3
+        ----------------------------------------
+
+        Positive Prompt - 
+        a cyborg girl, battle angel alita, black turtle neck tank top, long brown coat, glowing, (art by Ilya Kuvshinov) shadow, dramatic lighting ,masterpiece, best quality, <lora:GoodHands-beta2:1>, scenery
+
+        Negative Prompt - 
+        (two tails:1.2),FastNegativeV2,(bad-artist:1),(loli:1.2),(worst quality, low quality:1.4),(bad_prompt_version2:0.8),bad-hands-5,lowres,bad anatomy,bad hands,((text)),(watermark),error,missing fingers,extra digit,fewer digits,cropped,worst quality,low quality,normal quality,((username)),blurry,(extra limbs),bad-artist-anime,badhandv4,EasyNegative,ng_deepnegative_v1_75t,verybadimagenegative_v1.3,BadDream,(three hands:1.1),(three legs:1.1),(more than two hands:1.2),(more than two legs:1.2),
+
+
+        Example 4
+        ----------------------------------------
+
+        Positive Prompt - 
+        1girl coffee detailed 1980s fashion paris,8k, Darwyn Cooke, <lora:GoodHands-beta2:1>, scenery
+
+        Negative Prompt - 
+        (two tails:1.2),FastNegativeV2,(bad-artist:1),(loli:1.2),(worst quality, low quality:1.4),(bad_prompt_version2:0.8),bad-hands-5,lowres,bad anatomy,bad hands,((text)),(watermark),error,missing fingers,extra digit,fewer digits,cropped,worst quality,low quality,normal quality,((username)),blurry,(extra limbs),bad-artist-anime,badhandv4,EasyNegative,ng_deepnegative_v1_75t,verybadimagenegative_v1.3,BadDream,(three hands:1.1),(three legs:1.1),(more than two hands:1.2),(more than two legs:1.2),
+        
+        --------------------------------
+
+        Object Description - The object is a Coca-Cola can featuring a special edition design with Marvel's character Deadpool. The can is predominantly red with white and black text. It prominently displays the Coca-Cola logo in its classic white script against a red background near the top. Below this logo, the word 'ORIGINAL' is written in bold black letters. A dynamic image of Deadpool in his signature red and black superhero suit covers a substantial part of the can, depicting him in a playful and action-ready pose. The material of the can appears to be aluminum, typical for soda cans, with a glossy finish that enhances the vividness of its colors and design. This special edition can is likely used as a collectible or promotional item in addition to its primary use as a beverage container.
+        Gender - Male
+        
+        "

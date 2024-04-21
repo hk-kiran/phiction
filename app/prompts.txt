@@ -1,0 +1,162 @@
+------------
+In-context example
+------------
+
+Positive Prompt:
+
+lyco:GoodHands-beta2:0.5, high quality, masterpiece, (realistic, photo-realistic:1.2), high definition, ultra detailed, raw photo, Close-up of a magnificent tiara resting on an elegant velvet pedestal. The tiara is masterfully crafted with intricate designs and adorned with a myriad of precious gems that catch and reflect light from every angle, creating a mesmerizing sparkle. The backdrop is a softly focused, luxurious silk curtain in a subtle shade that complements the tiara’s metallic and gem tones. The lighting is expertly arranged to enhance the shimmering effects of the gems, highlighting the exquisite details of the craftsmanship. The scene is set to evoke a sense of royal elegance and timeless beauty, perfectly suited to display the tiara’s sophistication and grandeur in a captivating, regal manner.
+
+Negative Prompt:
+
+FastNegativeV2, (bad-artist:1.0), (loli:1.2), (worst quality, low quality:1.4), (bad_prompt_version2:0.8), bad-hands-5, lowres, ((text)), (watermark), error, cropped, worst quality, low quality, normal quality, ((username)), blurry, Close-up of a tiara clumsily placed on a cheap, plastic pedestal that mimics velvet poorly. The tiara itself lacks luster, with gems that appear dull and poorly attached, failing to sparkle or catch the light effectively. The background is a stark, unflattering piece of fabric that clashes with the tiara’s design. The lighting is harsh and improperly directed, creating glaring reflections that obscure the details of the tiara, making it look less appealing and cheap. The overall presentation is unprofessional and diminishes the perceived value and beauty of the tiara, rendering it unimpressive and undesirable.
+
+These prompts are crafted to either magnify the allure and brilliance of the tiara or to undermine its quality and presentation, depending on the intended effect of the video generation.
+
+caption_generation: 
+  system:
+  - type: text
+    text: "You are an assistant that will help generate captions and storyline for the images provided."
+
+  user:
+  - type: text
+    text: "Given a set of images depicting a coherent narrative context, your task is to analyze these images and construct a detailed storyline that captures the essence and continuity of the narrative depicted. 
+                     From these images, select the four most relevant ones that are crucial for understanding the main plot or thematic development. 
+                     These descriptions should be exaclty like that in the reference image. Include specific details about characters, settings, emotions, and any significant objects or symbols, maintaining a vivid and evocative tone. 
+                     The descriptions should match the exact contents in those images. Do not add a creative touch. 
+                     Next, synthesize the overarching narrative into a concise story composed of 6-7 detailed lines. 
+                     This story should encapsulate the main events, conflicts, and resolutions presented in the images, providing a coherent and engaging narrative thread.
+                     The captions must be ordered in the way that makes most sense for the story.
+    
+                     Format your output as a JSON file with two fields:
+                    
+                    captions: An array containing four strings, each a detailed description of one of the selected images.
+                    story: A string containing the 6-7 line detailed story derived from the images.
+
+                    Ensure that the output strictly adheres to the JSON structure and includes only the required elements with no additional text or explanations"
+
+pixar_caption_generation:
+  system:
+  - type: text
+    text: "You are an assistant that will help generate Pixar-like image descriptions based on the given text prompt."
+
+  user:
+  - type: text
+    text: Please describe the caption given below with vivid detail and emotional depth, as if setting the scene for a Pixar-style animated film. 
+          Focus on the key elements such as characters, their expressions, the environment, and any dynamic interactions or movements. 
+          Emphasize the mood, colors, and any whimsical elements that would translate well into an animated narrative. 
+          Describe such that there is motion to the image. Add the motion description. If there is a human in an image, keep all those humans constant in the description, and only use those humans.
+          If needed, generate the human descriptions, and only use those humans in the description as detailed in the description. Keep the human descriptions constant across all images.
+
+          If there is a human in an image, a main character, use the following description for the human:
+          Human Description: "This character resembles a Pixar-style human with a defined jawline and a straight, pointed nose. 
+                              His lips are thin, and his eyebrows are slender and subtly arched, enhancing his narrow, pensive eyes. 
+                              He boasts a fair complexion and short, neatly styled dark hair with a side parting. 
+                              He's dressed in a brown jacket with a plush, fur-lined collar and dark buttons, paired with a light-colored shirt beneath. 
+                              His trousers are dark, complemented by dark boots. The character is crouched in a focused pose, exuding a serene and slightly melancholic expression."
+   
+          
+          Output the captions as a JSON object with the following fields:
+          
+          captions: An array containing the detailed descriptions of the images with added motion in Pixar style.
+
+          ----------
+          
+          In-context example
+          
+          ----------
+
+          Example of a normal image description:
+
+          Against the commanding presence of a snow-covered mountain, a group embarks on a spirited trek, pulling sleds like colorful charms against the white canvas. 
+          They're rendered in Pixar's characteristic bold hues, their silhouettes etched with anticipation and the kinetic energy of an upcoming downhill race
+          
+          Example of a Pixar-style image description based on the given text prompt:
+
+          In the frosty embrace of a serene, snow-laden landscape, an animated scene unfurls, vivid as a painter's dream. The backdrop is a majestic mountain, its peaks frosted with a brilliant, shimmering white, towering protectively over the valley. It's an awe-inspiring giant, painted with the soft pastels of the early morning light, which casts long, dramatic shadows and bathes the scene in a tranquil, icy blue glow. 
+          At the heart of this frozen wonderland, a spirited group of adventurers brings warmth and vivacity to the cold. Each character is uniquely crafted in the quintessential Pixar style—expressive faces full of determination and joy, with eyes sparkling like stars against the crisp winter air. Their bodies are wrapped in colorful winter gear: bright reds, greens, and yellows that pop against the snowy white, making them stand out as they energetically pull their sleds.
+          The sleds themselves are whimsical creations, resembling oversized toys—vivid, patterned, and quirky. One sled might be striped like a candy cane, another polka-dotted with rainbow hues, and yet another painted with playful cartoon animals. They're not just sleds; they are treasures on skis, filled with supplies and wrapped packages that hint at stories yet to unfold.
+          As the group makes their way across the snow, there's a palpable sense of excitement. They are not merely walking; they are almost bouncing, their steps infused with the bouncy rhythm of a dance. The snow crunches rhythmically under their boots, and playful puffs of breath accompany their laughter, visible in the cold air like little clouds of joy.
+          Above, the sky is a canvas of light, the sun a gentle, glowing orb that seems to promise new adventures. A few flakes of snow drift lazily down, catching the sunlight and glittering as they fall, adding a touch of magic to the scene.
+          The mood is one of anticipation and camaraderie, as the group prepares for a downhill race that awaits. Their faces are alight with the thrill of the challenge, and their movements are filled with energetic preparation, adjusting goggles, tightening scarf knots, and giving each other encouraging pats on the back.
+          This Pixar-style animated setting is a celebration of friendship, adventure, and the sheer joy of a winter day spent in good company. The motion of the scene suggests the imminent rush of excitement, the laughter and shouts that will soon echo across the valley as they race down the mountain, sleds skimming over the snow, blurring the lines between animation and the heart-pounding thrill of real life
+          
+
+          The caption is detailed below:
+
+pixar_image_generation:
+  system:
+  - type: text
+    text: "You are an assistant that will help generate Pixar-like animated images based on the given text prompt."
+
+  
+
+
+
+I will give you a base prompt which you need to modify, and make it generate image captions with added motion to them even if they do not contain motion inherently. 
+
+Base prompt:
+
+Given a set of images depicting a coherent narrative context, your task is to analyze these images and construct a detailed storyline that captures the essence and continuity of the narrative depicted. 
+                     From these images, select the four most relevant ones that are crucial for understanding the main plot or thematic development. 
+                     These descriptions should be exaclty like that in the reference image. Include specific details about characters, settings, emotions, and any significant objects or symbols, maintaining a vivid and evocative tone. 
+                     The descriptions should match the exact contents in those images. Do not add a creative touch. 
+                     Next, synthesize the overarching narrative into a concise story composed of 6-7 detailed lines. 
+                     This story should encapsulate the main events, conflicts, and resolutions presented in the images, providing a coherent and engaging narrative thread.
+                     The captions must be ordered in the way that makes most sense for the story.
+    
+                     Format your output as a JSON file with two fields:
+                    
+                    captions: An array containing four strings, each a detailed description of one of the selected images.
+                    story: A string containing the 6-7 line detailed story derived from the images.
+
+                    Ensure that the output strictly adheres to the JSON structure and includes only the required elements with no additional text or explanations"
+
+
+
+
+
+
+
+          Please describe the caption given below with vivid detail and emotional depth, as if setting the scene for a Pixar-style animated film. 
+          Focus on the key elements such as characters, their expressions, the environment, and any dynamic interactions or movements. 
+          Emphasize the mood, colors, and any whimsical elements that would translate well into an animated narrative. 
+          Describe such that there is motion to the image. Add the motion description. If there is a human in an image, keep all those humans constant in the description, and only use those humans.
+          If needed, generate the human descriptions, and only use those humans in the description as detailed in the description. Keep the human descriptions constant across all images.
+
+          If there is a human in an image, a main character, use the following description for the human:
+          Human Description: "This character resembles a Pixar-style human with a defined jawline and a straight, pointed nose. 
+                              His lips are thin, and his eyebrows are slender and subtly arched, enhancing his narrow, pensive eyes. 
+                              He boasts a fair complexion and short, neatly styled dark hair with a side parting. 
+                              He's dressed in a brown jacket with a plush, fur-lined collar and dark buttons, paired with a light-colored shirt beneath. 
+                              His trousers are dark, complemented by dark boots. The character is crouched in a focused pose, exuding a serene and slightly melancholic expression."
+   
+          
+          Output the captions as a JSON object with the following fields:
+          
+          captions: An array containing the detailed descriptions of the images with added motion in Pixar style.
+
+          ----------
+          
+          In-context example
+          
+          ----------
+
+          Example of a normal image description:
+
+          Against the commanding presence of a snow-covered mountain, a group embarks on a spirited trek, pulling sleds like colorful charms against the white canvas. 
+          They're rendered in Pixar's characteristic bold hues, their silhouettes etched with anticipation and the kinetic energy of an upcoming downhill race
+          
+          Example of a Pixar-style image description based on the given text prompt:
+
+          In the frosty embrace of a serene, snow-laden landscape, an animated scene unfurls, vivid as a painter's dream. The backdrop is a majestic mountain, its peaks frosted with a brilliant, shimmering white, towering protectively over the valley. It's an awe-inspiring giant, painted with the soft pastels of the early morning light, which casts long, dramatic shadows and bathes the scene in a tranquil, icy blue glow. 
+          At the heart of this frozen wonderland, a spirited group of adventurers brings warmth and vivacity to the cold. Each character is uniquely crafted in the quintessential Pixar style—expressive faces full of determination and joy, with eyes sparkling like stars against the crisp winter air. Their bodies are wrapped in colorful winter gear: bright reds, greens, and yellows that pop against the snowy white, making them stand out as they energetically pull their sleds.
+          The sleds themselves are whimsical creations, resembling oversized toys—vivid, patterned, and quirky. One sled might be striped like a candy cane, another polka-dotted with rainbow hues, and yet another painted with playful cartoon animals. They're not just sleds; they are treasures on skis, filled with supplies and wrapped packages that hint at stories yet to unfold.
+          As the group makes their way across the snow, there's a palpable sense of excitement. They are not merely walking; they are almost bouncing, their steps infused with the bouncy rhythm of a dance. The snow crunches rhythmically under their boots, and playful puffs of breath accompany their laughter, visible in the cold air like little clouds of joy.
+          Above, the sky is a canvas of light, the sun a gentle, glowing orb that seems to promise new adventures. A few flakes of snow drift lazily down, catching the sunlight and glittering as they fall, adding a touch of magic to the scene.
+          The mood is one of anticipation and camaraderie, as the group prepares for a downhill race that awaits. Their faces are alight with the thrill of the challenge, and their movements are filled with energetic preparation, adjusting goggles, tightening scarf knots, and giving each other encouraging pats on the back.
+          This Pixar-style animated setting is a celebration of friendship, adventure, and the sheer joy of a winter day spent in good company. The motion of the scene suggests the imminent rush of excitement, the laughter and shouts that will soon echo across the valley as they race down the mountain, sleds skimming over the snow, blurring the lines between animation and the heart-pounding thrill of real life
+
+          The caption is detailed below:
+          "Four individuals on horseback pose for a photo on a muddy trail with snow-capped mountains and pine trees in the background. They are dressed warmly and are smiling, indicating an adventurous moment shared among friends."
+  
+    
