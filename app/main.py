@@ -9,6 +9,29 @@ from audio import *
 
 #Video ad generation prompt
 
+class RunGenerate:
+    def __init__(self):
+        self.gen = Generate()
+        self.aud = GenerateAudio()
+        self.language = 'English'
+        self.voice = 'Nicole'
+        self.model = "eleven_multilingual_v2"
+
+        self.description = None
+
+    def _generate_description(self, image):
+        self.description = self.gen.generate_description(image)
+    
+    def get_sd_human_prompt(self, gender):
+        sd_prompt = gen.generate_sd_prompt_human(description, gender) # Used for API call
+        return sd_prompt
+    
+    def get_sd_object_prompt(self):
+        object_prompt = gen.generate_sd_prompt_object(description)
+        return object_prompt
+
+
+
 if __name__ == '__main__':
 
     gen = Generate()
