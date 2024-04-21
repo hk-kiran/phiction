@@ -1,5 +1,6 @@
 # pip-compile --output-file=requirements.txt requirements.in
 
+flask
 opencv-python
 matplotlib
 pillow
