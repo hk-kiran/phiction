@@ -11,14 +11,19 @@ from pydub import AudioSegment
 # from pydub.effects import volume_normalize
 from moviepy.editor import VideoFileClip, AudioFileClip
 
+
+from skimage.filters import gaussian
+from moviepy.editor import VideoFileClip, ImageClip, CompositeVideoClip
+
 import os
 import sys
 
 class stich():
     def video(self):
         clip_list = [
-            "./videos/AnimateDiff_00012.mp4",
-            "./videos/AnimateDiff_00015.mp4",
+            "./videos/cocacola_1.mp4",
+            "./videos/cocacola_2.mp4",
+            "./videos/cocacola_3.mp4",
         ]  # List of video clip filenames
         transition_duration = 0.3  # 1 second transition duration
 
@@ -63,8 +68,8 @@ class stich():
 
 
     def audio(self):
-        naration = "./naration/English_tiaras.mp3"
-        music = "./music/audio_0.wav"
+        naration = "./naration/English_coca_cola.mp3"
+        music = "./music/bg_cocacola.wav"
 
         # Load the audio tracks using pydub
         audio1 = AudioSegment.from_file(naration)
@@ -80,19 +85,19 @@ class stich():
         # output_path = os.path.join(audio_dir, "superimposed_increased_audio.mp3")
 
         # Export the superimposed audio to the output path
-        superimposed_audio.export("audio_si_res1.mp3", format="mp3")
+        superimposed_audio.export("audio_si_cocacola.mp3", format="mp3")
 
         print(
             "Superimposed and increased volume audio saved successfully at:",
-            "audio_si_res1",
+            "audio_si_cocacola",
         )
         return superimposed_audio
 
 
     def merge(self, self.final_clip):
-        superimposed_audio = AudioFileClip("audio_si_res1.mp3")
+        superimposed_audio = AudioFileClip("audio_si_cocacola.mp3")
         final_ad = self.final_clip.set_audio(superimposed_audio)
-        final_ad.write_videofile("final_ad.mp4", codec="libx264", audio_codec="aac")
+        final_ad.write_videofile("cocacola_final_ad.mp4", codec="libx264", audio_codec="aac")
 
 
     #in this order
