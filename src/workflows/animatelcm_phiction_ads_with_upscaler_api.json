@@ -1,0 +1,245 @@
+{
+  "47": {
+    "inputs": {
+      "model_name": "AnimateLCM_sd15_t2v.ckpt"
+    },
+    "class_type": "ADE_LoadAnimateDiffModel",
+    "_meta": {
+      "title": "Load AnimateDiff Model 🎭🅐🅓②"
+    }
+  },
+  "49": {
+    "inputs": {
+      "motion_model": [
+        "47",
+        0
+      ]
+    },
+    "class_type": "ADE_ApplyAnimateDiffModelSimple",
+    "_meta": {
+      "title": "Apply AnimateDiff Model 🎭🅐🅓②"
+    }
+  },
+  "50": {
+    "inputs": {
+      "beta_schedule": "lcm[100_ots]",
+      "model": [
+        "64",
+        0
+      ],
+      "m_models": [
+        "49",
+        0
+      ],
+      "context_options": [
+        "52",
+        0
+      ]
+    },
+    "class_type": "ADE_UseEvolvedSampling",
+    "_meta": {
+      "title": "Use Evolved Sampling 🎭🅐🅓②"
+    }
+  },
+  "load_ckpt": {
+    "inputs": {
+      "ckpt_name": "helloyoung25d_V15j.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "52": {
+    "inputs": {
+      "context_length": 16,
+      "context_stride": 1,
+      "context_overlap": 4,
+      "fuse_method": "pyramid",
+      "use_on_equal_length": false,
+      "start_percent": 0,
+      "guarantee_steps": 1
+    },
+    "class_type": "ADE_StandardUniformContextOptions",
+    "_meta": {
+      "title": "Context Options◆Standard Uniform 🎭🅐🅓"
+    }
+  },
+  "56": {
+    "inputs": {
+      "samples": [
+        "58",
+        1
+      ],
+      "vae": [
+        "67",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "58": {
+    "inputs": {
+      "add_noise": true,
+      "noise_seed": 999889999,
+      "cfg": 1.8,
+      "model": [
+        "50",
+        0
+      ],
+      "positive": [
+        "pos_prompt",
+        0
+      ],
+      "negative": [
+        "neg_prompt",
+        0
+      ],
+      "sampler": [
+        "59",
+        0
+      ],
+      "sigmas": [
+        "60",
+        0
+      ],
+      "latent_image": [
+        "61",
+        0
+      ]
+    },
+    "class_type": "SamplerCustom",
+    "_meta": {
+      "title": "SamplerCustom"
+    }
+  },
+  "59": {
+    "inputs": {
+      "euler_steps": 2,
+      "lcm_steps": 2,
+      "tweak_sigmas": false,
+      "ancestral": 0
+    },
+    "class_type": "SamplerLCMCycle",
+    "_meta": {
+      "title": "SamplerLCMCycle"
+    }
+  },
+  "60": {
+    "inputs": {
+      "steps": 10,
+      "denoise": 1,
+      "model": [
+        "50",
+        0
+      ]
+    },
+    "class_type": "LCMScheduler",
+    "_meta": {
+      "title": "LCMScheduler"
+    }
+  },
+  "61": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "batch_size": 120
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "pos_prompt": {
+    "inputs": {
+      "text": "masterpiece,best quality,1girl, leaning forward coat red hair shadow dramatic lighting Georgeana Ireland matrix ,smile, <lora:GoodHands-beta2:1>,",
+      "token_normalization": "mean",
+      "weight_interpretation": "A1111",
+      "clip": [
+        "64",
+        1
+      ]
+    },
+    "class_type": "BNK_CLIPTextEncodeAdvanced",
+    "_meta": {
+      "title": "CLIP Text Encode (Advanced)"
+    }
+  },
+  "neg_prompt": {
+    "inputs": {
+      "text": "(two tails:1.2),FastNegativeV2,(bad-artist:1),(loli:1.2),(worst quality, low quality:1.4),(bad_prompt_version2:0.8),bad-hands-5,lowres,bad anatomy,bad hands,((text)),(watermark),error,missing fingers,extra digit,fewer digits,cropped,worst quality,low quality,normal quality,((username)),blurry,(extra limbs),bad-artist-anime,badhandv4,EasyNegative,ng_deepnegative_v1_75t,verybadimagenegative_v1.3,BadDream,(three hands:1.1),(three legs:1.1),(more than two hands:1.2),(more than two legs:1.2),",
+      "token_normalization": "mean",
+      "weight_interpretation": "A1111",
+      "clip": [
+        "64",
+        1
+      ]
+    },
+    "class_type": "BNK_CLIPTextEncodeAdvanced",
+    "_meta": {
+      "title": "CLIP Text Encode (Advanced)"
+    }
+  },
+  "64": {
+    "inputs": {
+      "lora_name": "AnimateLCM_sd15_t2v_lora.safetensors",
+      "strength_model": 1,
+      "strength_clip": 1,
+      "model": [
+        "load_ckpt",
+        0
+      ],
+      "clip": [
+        "load_ckpt",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "67": {
+    "inputs": {
+      "vae_name": "diffusion_pytorch_model.bin"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "70": {
+    "inputs": {
+      "upscale_model": "4x_NMKD-UltraYandere_300k.pth",
+      "mode": "rescale",
+      "rescale_factor": 2,
+      "resize_width": 1024,
+      "resampling_method": "lanczos",
+      "supersample": "true",
+      "rounding_modulus": 8,
+      "image": [
+        "56",
+        0
+      ]
+    },
+    "class_type": "CR Upscale Image",
+    "_meta": {
+      "title": "🔍 CR Upscale Image"
+    }
+  },
+  "save_image": {
+    "inputs": {
+      "images": [
+        "70",
+        0
+      ]
+    },
+    "class_type": "ETN_SendImageWebSocket",
+    "_meta": {
+      "title": "Send Image (WebSocket)"
+    }
+  }
+}
